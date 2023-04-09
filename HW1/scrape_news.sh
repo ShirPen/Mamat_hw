@@ -28,7 +28,6 @@ echo "$articles" | wc -l
 		"$Bennett"", Peretz" "$Peretz"
 	fi
 
-#This is a Test
 
  done
 
