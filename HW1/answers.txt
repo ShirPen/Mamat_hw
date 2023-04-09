@@ -1,0 +1,8 @@
+HW 1 Open Answers
+
+A: If we were to do by hand, we would estimate each article to take between 10 and 15 minutes. Given 60 articles, this would give a grand total of 15 hours approximately 
+
+B: Through the exercise, we can see the power behind a script that runs through the terminal. It takes a menial task and automates it with minimal effort (in terms of how much code needs to be written). 
+As stated above, any menial task that can be easily automated such as counting the amount of appearances, whether it be names in an article, people with similar blood types for a transfusion from a master list, or which stocks in the past year have gained a certain percent value from a master list of lets say the NASDAQ which can be thousands of companies long
+
+C: In order to do this, we can either manually run the script once an hour, or create a second script that runs the script once an hour using the internal clock of the computer to determine run times. In order to avoid duplicates, we can add to the variable “articles” all the articles currently live on the website, in addition to articles that have been previously checked (can be pulled from the csv file) and only then run the sort uniq command.
