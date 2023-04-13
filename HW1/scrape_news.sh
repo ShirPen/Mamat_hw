@@ -1,5 +1,4 @@
 #!/bin/bash
-#chmod +x ./scrape_news.sh
 
 site="https://ynetnews.com/category/3082"
 
@@ -33,6 +32,5 @@ echo "$articles" | wc -l
 
 
  done
-
 
 
