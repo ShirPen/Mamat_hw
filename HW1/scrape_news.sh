@@ -13,10 +13,12 @@ echo "$articles" | wc -l
 
  for article in $articles; do 
 
-	Netanyahu=$(curl -s "$article" | grep -o 'Netanyahu' | wc -l)
-	Gantz=$(curl -s "$article" | grep -o 'Gantz' | wc -l)
-	Bennett=$(curl -s "$article" | grep -o 'Bennett' | wc -l)
-	Peretz=$(curl -s "$article" | grep -o 'Peretz' | wc -l)
+ 	curr_article=$(wget --no-check-certificate -O - $article 2>/dev/null)
+
+	Netanyahu=$(echo $curr_article | grep -ioP 'Netanyahu' | wc -l)
+	Gantz=$(echo $curr_article | grep -ioP 'Gantz' | wc -l)
+	Bennett=$(echo $curr_article | grep -ioP 'Bennett' | wc -l)
+	Peretz=$(echo $curr_article | grep -ioP 'Peretz' | wc -l)
 
 	#each variable counts the amount of times a name appears in the article
 
@@ -30,5 +32,6 @@ echo "$articles" | wc -l
 
 
  done
+
 
 
