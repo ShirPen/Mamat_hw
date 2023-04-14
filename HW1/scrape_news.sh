@@ -9,7 +9,7 @@ articles=$(echo "$data" | \
 		   sort | uniq)
 #pulls all the articles, sorts them, and returns only the unique 
 
-echo "$articles" | wc -l
+echo "$articles" | wc -l >> results.csv
 
  for article in $articles; do 
 
@@ -23,11 +23,11 @@ echo "$articles" | wc -l
 	#each variable counts the amount of times a name appears in the article
 
 	if [[ $(($Netanyahu + $Gantz + $Bennett + $Peretz)) -eq 0 ]]; then
-		echo "$article"", -"
+		echo "$article"", -" >> results.csv
 
 	else
 		echo "$article"", Netanyahu," "$Netanyahu"", Gantz," "$Gantz"", Bennett,"\
-		"$Bennett"", Peretz" "$Peretz"
+		"$Bennett"", Peretz" "$Peretz" >> results.csv
 	fi
 
 
