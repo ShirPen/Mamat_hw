@@ -53,14 +53,14 @@ void operate( FILE *f){
             fprintf(stderr, "Grade in line %d is not valid", line);
         }
         else{
-            if( retval < curr_min){
-                curr_min = retval;
+            if( grade < curr_min){
+                curr_min = grade;
             }
         }
         line ++;
     }
 
-    printf("%d\n", retval);
+    printf("%d\n", curr_min);
 }
 
 int grade_check( int grade){
