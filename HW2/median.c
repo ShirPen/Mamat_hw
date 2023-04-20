@@ -34,7 +34,7 @@ int main(int argc, char **argv){
 // Driver function
 void operate(FILE *f)
 {
-	int grades[100] = {0};
+	int grades[101] = {0};
 	int grade;
 	int retval;
     int line = 1;
@@ -63,7 +63,7 @@ void operate(FILE *f)
 	    line ++;
 	}
 	int i;
-	for (i = 0; i < 100 ; i++){
+	for (i = 0; i <= 100 ; i++){
 		stop += grades[i];
 		if(stop >= (amount+1)/2){
 			break;
