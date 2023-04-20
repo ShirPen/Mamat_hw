@@ -60,7 +60,7 @@ void operate( FILE *f){
         line ++;
     }
 
-    printf(".2lf\n", avg / amount);
+    printf("%.2lf\n", (avg / amount));
 }
 
 int grade_check( int grade){
