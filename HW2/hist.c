@@ -21,6 +21,11 @@ int main(int argc, char **argv) {
 
     /* Initialize array */
     int *bins = (int*)calloc(nbins, sizeof(int));
+    
+    if(bins == NULL){
+    	fprintf(stderr, "Memoray allocation failed\n");
+    	exit(1);
+    }
 
     operate(bins);
     free(bins);
