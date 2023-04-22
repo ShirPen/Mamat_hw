@@ -14,6 +14,10 @@ int main(int argc, char **argv){
     }
     else{
         f = fopen(argv[1], "r");
+        if(f == NULL ){
+            fprintf(stderr, "Failed to open file\n");
+            return(1);
+        }
     }
 
     /* Check for errors */
@@ -26,17 +30,19 @@ int main(int argc, char **argv){
 
     /* Close file if its open */
     if (f != NULL) {
-        fclose(f);
+        if(fclose(f) !=0 ){
+            fprintf(stderr, "Failed to close file\n");
+            return(1);
+        }
     }
 }
 
 
 // Driver function
-void operate(FILE *f)
-{
-	int grades[101] = {0};
-	int grade;
-	int retval;
+void operate(FILE *f){
+    int grades[101] = {0};
+    int grade;
+    int retval;
     int line = 1;
     int amount = 0;
     int stop = 0; //stop condition for finding median
