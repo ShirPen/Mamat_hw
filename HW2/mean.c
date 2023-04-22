@@ -14,8 +14,8 @@ int main(int argc, char **argv){
     }
     else{
         f = fopen(argv[1], "r");
-        if(fclose(f) !=0 ){
-            fprintf(stderr, "Failed to close file\n");
+        if(f == NULL ){
+            fprintf(stderr, "Failed to open file\n");
             return(1);
         }
     }
