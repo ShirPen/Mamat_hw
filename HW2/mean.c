@@ -30,7 +30,6 @@ int main(int argc, char **argv){
 
     /* Close file if its open */
     if (f != NULL) {
-        fclose(f);
         if(fclose(f) !=0 ){
             fprintf(stderr, "Failed to close file\n");
             return(1);
