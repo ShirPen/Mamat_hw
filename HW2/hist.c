@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     
     if(bins == NULL){
     	fprintf(stderr, "Memoray allocation failed\n");
-    	exit(1);
+    	return(1);
     }
 
     operate(bins);
@@ -32,7 +32,10 @@ int main(int argc, char **argv) {
 
     /* Close file if its open */
     if (f != NULL) {
-        fclose(f);
+        if(fclose(f) !=0 ){
+            fprintf(stderr, "Failed to close file\n");
+            return(1);
+        }
     }
 }
 
@@ -50,6 +53,10 @@ void parse_arg(int argc, char **argv){
         }
         else{
             f = fopen(argv[i], "r");
+            if (f == NULL){
+                fprintf(stderr, "Failed to open file\n");
+                return(1);
+            }
         }
     }
 }
