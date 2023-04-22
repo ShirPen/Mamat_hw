@@ -50,7 +50,7 @@ void operate( FILE *f){
         }
         else if (grade_check(grade) == -1){
             /* Checks that grade is valid */
-            fprintf(stderr, "Grade in line %d is not valid", line);
+            fprintf(stderr, "Grade in line %d is not valid\n", line);
         }
         else{
             if( grade < curr_min){
@@ -60,7 +60,7 @@ void operate( FILE *f){
         line ++;
     }
 
-    printf("%d\n", curr_min);
+    printf("%d\t", curr_min);
 }
 
 int grade_check( int grade){
