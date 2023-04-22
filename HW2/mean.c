@@ -51,7 +51,7 @@ void operate( FILE *f){
         }
         else if (grade_check(grade) == -1){
             /* Checks that grade is valid */
-            fprintf(stderr, "Grade in line %d is not valid", line);
+            fprintf(stderr, "Grade in line %d is not valid\n", line);
         }
         else {
             avg += grade;
@@ -60,7 +60,7 @@ void operate( FILE *f){
         line ++;
     }
 
-    printf("%.2lf\n", (avg / amount));
+    printf("%.2lf\t", (avg / amount));
 }
 
 int grade_check( int grade){
