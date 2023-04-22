@@ -48,6 +48,7 @@ void operate( FILE *f){
         }
         else if(retval != 1){
             /* Error */
+            fprintf(stderr, "Error: not a number\n");
         }
         else if (grade_check(grade) == -1){
             /* Checks that grade is valid */
