@@ -67,12 +67,18 @@ void operate (int *bins){
         }
         else if (grade_check(grade) == -1){
             /* Checks that grade is valid */
-            fprintf(stderr, "Grade in line %d is not valid", line);
+            fprintf(stderr, "Grade in line %d is not valid\n", line);
         }
         else{
             /* Find the right bin */
             int n = grade / (100/nbins);
-            bins[n]++;
+            if(grade == 100){
+            	bins[n-1]++;
+            }
+            else{
+                bins[n]++;
+            }
+
         }
         line ++;
     }
