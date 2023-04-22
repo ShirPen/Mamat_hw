@@ -54,7 +54,7 @@ void operate(FILE *f)
 	    }
 	    else if (grade_check(grade) == -1){
 	    	/* Checks that grade is valid */
-	    	fprintf(stderr, "Grade in line %d is not valid", line);
+	    	fprintf(stderr, "Grade in line %d is not valid\n", line);
 	        }
 	    else{
 	    	grades[grade] ++;
@@ -69,7 +69,7 @@ void operate(FILE *f)
 			break;
 		}
 	}
-	printf("%d", i);
+	printf("%d\t", i);
 
 }
 
