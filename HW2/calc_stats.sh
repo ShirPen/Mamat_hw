@@ -29,23 +29,24 @@ done
 
 
 
-./hist -nbins 20 < "${course_num}.txt" > "pass.txt"
+./hist.exe -nbins 20 < "${course_num}.txt" > "pass.txt"
 
 pass=$(awk -F '\t' '$1 > 55 {sum += $2 } END {print sum} ' pass.txt)
 total=$(awk -F '\t' '{sum += $2} END {print sum}' pass.txt)
 pass_percent=$(expr $pass \* 100 / $total)
 #calculates the amount of students who passed and total valid grades
 
-#rm pass.txt 
+rm pass.txt
+#deleting intermediate file
 
 echo "$pass_percent%" >> "statistics.txt"
 
-./hist < "${course_num}.txt" > "histogram.txt"
+./hist.exe < "${course_num}.txt" > "histogram.txt"
 #Compiles and runs histogram 
 
 mv "statistics.txt" "${course_num}_stats"
 mv "histogram.txt" "${course_num}_stats"
-
+#moving the files to the folder
 
 
 
