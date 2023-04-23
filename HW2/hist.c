@@ -55,7 +55,7 @@ void parse_arg(int argc, char **argv){
             f = fopen(argv[i], "r");
             if (f == NULL){
                 fprintf(stderr, "Failed to open file\n");
-                return(1);
+                exit(1);
             }
         }
     }
