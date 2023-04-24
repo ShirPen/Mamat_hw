@@ -61,7 +61,7 @@ void operate( FILE *f){
             fprintf(stderr, "Error: not a number\n");
             exit(1);
         }
-        else if (grade_check(grade) == FILED){
+        else if (grade_check(grade) == FAILED){
             /* Checks that grade is valid */
             fprintf(stderr, "Grade in line %d is not valid\n", line);
         }
@@ -78,7 +78,7 @@ void operate( FILE *f){
 int grade_check( int grade){
 
     if(grade < MIN_GRADE || grade > MAX_GRADE){
-        return FILED;
+        return FAILED;
     }
     else{
         return 0;
