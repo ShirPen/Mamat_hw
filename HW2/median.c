@@ -85,7 +85,7 @@ void operate(FILE *f){
 int grade_check( int grade){
 
     if(grade < MIN_GRADE || grade > MAX_GRADE ){
-        return FILED;
+        return FAILED;
     }
     else{
         return 0;
