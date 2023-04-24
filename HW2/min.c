@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define MAX_GRADE 100
+#define MIN_GRADE 0
+#define FAILED -1
 
 void operate(FILE *f);
 int grade_check( int grade);
@@ -56,7 +59,7 @@ void operate( FILE *f){
             fprintf(stderr, "Error: not a number\n");
             exit(1);
         }
-        else if (grade_check(grade) == -1){
+        else if (grade_check(grade) == FAILED){
             /* Checks that grade is valid */
             fprintf(stderr, "Grade in line %d is not valid\n", line);
         }
@@ -73,8 +76,8 @@ void operate( FILE *f){
 
 int grade_check( int grade){
 
-    if(grade<0 || grade > 100){
-        return -1;
+    if(grade < MIN_GRADE || grade > MAX_GRADE){
+        return FAILED;
     }
     else{
         return 0;
