@@ -195,7 +195,7 @@ void stack_print(pstack_t stack){
         fprintf(stderr, "Error: stack points to NULL\n");
         return;
     }
-    for(int i=0; i< stack->curr_size; i++){
+    for(int i=(stack->curr_size) -1; i>=0; i--){
         stack->print_func(stack->data[i]);
     }
 }
