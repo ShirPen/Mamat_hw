@@ -11,6 +11,7 @@ struct stack {
     print_t print_func;
 };
 
+//Creates the stack, user must supply clone, destroy, and print functions
 pstack_t stack_create(size_t max_num_of_elem, clone_t clone_func,
                       destroy_t destroy_func, print_t print_func){
 
@@ -67,7 +68,7 @@ pstack_t stack_create(size_t max_num_of_elem, clone_t clone_func,
 
 }
 
-
+//Given a pointer to a stack, it free's the memory thus destroying the stack
 Result stack_destroy(pstack_t stack){
 
     if(stack == NULL){
@@ -88,6 +89,7 @@ Result stack_destroy(pstack_t stack){
     return SUCCESS;
 }
 
+//Given an element supplied by the user and a stack, it will add said element
 Result stack_push(pstack_t stack, elem_t new_elem){
 
     if(stack == NULL){
@@ -113,7 +115,8 @@ Result stack_push(pstack_t stack, elem_t new_elem){
         return FAIL;
     }
     else{
-        stack->data[stack->curr_size] = elem_clone; //pointer arithmetic
+        stack->data[stack->curr_size] = elem_clone; //pointer arithmetic to get
+                                                    //correct space in array
         stack->curr_size++;
         return SUCCESS;
     }
@@ -121,6 +124,8 @@ Result stack_push(pstack_t stack, elem_t new_elem){
 
 }
 
+//Given a stack, the last element in will be taken out and its memory freed
+//The user must supply the destroy function
 void stack_pop(pstack_t stack){
 
     if(stack == NULL){
@@ -133,13 +138,14 @@ void stack_pop(pstack_t stack){
         return;
     }
     else{
-        elem_t popped = stack->data[stack->curr_size -1];
+        elem_t popped = stack->data[stack->curr_size -1]; //go to last element
         stack->destroy_func(popped);
         stack->curr_size--;
 
     }
 }
 
+//Given a stack, the top element value will be returned (and no changes occur)
 elem_t stack_peek(pstack_t stack){
 
     if(stack == NULL){
@@ -155,6 +161,7 @@ elem_t stack_peek(pstack_t stack){
     }
 }
 
+//Given a stack, the amount of elements in the stack will be returned
 size_t stack_size(pstack_t stack){
 
     if(stack == NULL){
@@ -165,6 +172,7 @@ size_t stack_size(pstack_t stack){
     return stack->curr_size;
 }
 
+//Given a stack, it will return if a stack is at max capacity or not
 bool stack_is_empty(pstack_t stack){
 
     if(stack == NULL){
@@ -179,6 +187,7 @@ bool stack_is_empty(pstack_t stack){
     }
 }
 
+//Given a stack, it will return the availabe space in said stack
 size_t stack_capacity(pstack_t stack){
 
     if(stack == NULL){
@@ -190,6 +199,7 @@ size_t stack_capacity(pstack_t stack){
 
 }
 
+//Prints all the elements in the stack
 void stack_print(pstack_t stack){
     if(stack == NULL){
         fprintf(stderr, "Error: stack points to NULL\n");
