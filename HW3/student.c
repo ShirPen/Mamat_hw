@@ -1,6 +1,7 @@
 #include "student.h"
 #include <string.h>
 
+//Clones an element
 elem_t student_clone (elem_t e){
 
     if(e == NULL){
@@ -40,16 +41,20 @@ elem_t student_clone (elem_t e){
     }
 }
 
+//Destroys a student by freeing the memory
 void student_destroy(elem_t e){
 
+    //Casts e into a student type
     pstudent_t  student_dest = (struct student*)e;
 
     free(student_dest->name);
     free(student_dest);
 }
 
+//Prints all the fields of a student
 void student_print(elem_t e){
 
+    //Casts e into a student type
     pstudent_t  stud_p = (struct student*)e;
 
     printf("student name: %s, age: %d, id: %d.\n", stud_p->name, stud_p->age,
