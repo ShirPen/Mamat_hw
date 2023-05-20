@@ -13,12 +13,12 @@ if ! [[ -f "${course_num}.txt" ]]; then
 fi
 #Checks that xxxxxx.txt exits
 
-if [[ -d "${course_num}_stats" ]]; then
-	rm -rf "${course_num}_stats"
+if [[ -d "${course_num}_stat" ]]; then
+	rm -rf "${course_num}_stat"
 fi
-#Checks if a stats folder exists, and delets it and all its contents if it does
+#Checks if a stat folder exists, and delets it and all its contents if it does
 
-mkdir "${course_num}_stats"
+mkdir "${course_num}_stat"
 
 for file in mean.exe median.exe min.exe max.exe; do
 
@@ -44,8 +44,8 @@ echo "$pass_percent%" >> "statistics.txt"
 ./hist.exe < "${course_num}.txt" > "histogram.txt"
 #Compiles and runs histogram 
 
-mv "statistics.txt" "${course_num}_stats"
-mv "histogram.txt" "${course_num}_stats"
+mv "statistics.txt" "${course_num}_stat"
+mv "histogram.txt" "${course_num}_stat"
 #moving the files to the folder
 
 
