@@ -89,7 +89,12 @@ struct student* student_init(const char* name, int id){
         return NULL;
     }
 
+<<<<<<< HEAD
     student->course_list = NULL;
+=======
+    student->course_list = list_init(course_clone,
+                                     course_destroy);
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
     student->id = id;
     student->name = malloc(strlen(name) + 1);
     student->course_total = 0;
@@ -244,6 +249,7 @@ int grades_print_all(struct grades *grades){
     }
 
     // Start with the head of the linked list
+<<<<<<< HEAD
     struct iterator* current = list_begin(grades->student_list);
 
     pstudent curr_student;
@@ -253,6 +259,17 @@ int grades_print_all(struct grades *grades){
     	curr_student = list_get(current);
         print_student(curr_student);
         current = list_next(current);
+=======
+    struct iterator* current = (struct iterator *) grades->student_list;
+
+    pstudent curr_student = (struct student*) grades->student_list;
+
+    while(current != NULL){
+
+        print_student(curr_student);
+        current = list_next(current);
+        curr_student = (struct student*) current;
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
 
     }
 
@@ -273,10 +290,16 @@ int course_clone (void *element, void **output){
     }
     else {
 
+<<<<<<< HEAD
         pcourse course_copy = (pcourse)malloc(sizeof(struct course));
 
         if (course_copy == NULL) {
         	*output= NULL;
+=======
+        pcourse course_copy = malloc(sizeof(struct course));
+
+        if (course_copy == NULL) {
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
             return FAIL;
         }
 
@@ -290,12 +313,18 @@ int course_clone (void *element, void **output){
         if(orig_course->course_grade < 0 || orig_course->course_grade > 100){
             free(course_copy->course_name);
             free(course_copy);
+<<<<<<< HEAD
             *output= NULL;
+=======
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
             return FAIL;
         }
 
         course_copy->course_grade = orig_course->course_grade;
+<<<<<<< HEAD
         *output= course_copy;
+=======
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
 
         return SUCCESS;
 
@@ -333,7 +362,10 @@ int student_clone (void *element, void **output){
         pstudent student_copy = malloc(sizeof(struct student));
 
         if (student_copy == NULL) {
+<<<<<<< HEAD
         	*output= NULL;
+=======
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
             return FAIL;
         }
 
@@ -350,13 +382,20 @@ int student_clone (void *element, void **output){
 
         if(orig_student->id < 0){
             free(student_copy);
+<<<<<<< HEAD
             *output= NULL;
+=======
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
             return FAIL;
         }
 
         student_copy->id = orig_student->id;
+<<<<<<< HEAD
         student_copy->course_list = list_init(course_clone, course_destroy); // Initialize the courses list, if needed
         *output= student_copy;
+=======
+        student_copy->course_list = NULL; // Initialize the courses list, if needed
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
 
         return SUCCESS;
 
@@ -404,6 +443,7 @@ void student_destroy(void* element){
 int check_course(const char *course_name, pstudent student){
 
 // Start with the head of the linked list
+<<<<<<< HEAD
     struct iterator* current = list_begin(student->course_list);
 
     pcourse check;
@@ -412,11 +452,23 @@ int check_course(const char *course_name, pstudent student){
 
     	check = (struct course*)list_get(current);
 
+=======
+    struct iterator* current = (struct iterator *) student->course_list;
+
+    pcourse check = (struct course*) student->course_list;
+
+    while(current != NULL){
+
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
         if(strcmp(course_name, check->course_name) == 0 ){
             return FAIL;
         }
         else{
             current = list_next(current);
+<<<<<<< HEAD
+=======
+            check = (struct course*) current;
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
         }
 
     }
@@ -436,6 +488,7 @@ int check_course(const char *course_name, pstudent student){
 pstudent check_student(int id, pgrades grades_m){
 
 // Start with the head of the linked list
+<<<<<<< HEAD
     struct iterator* current = list_begin(grades_m->student_list);
 
     pstudent check;
@@ -444,11 +497,23 @@ pstudent check_student(int id, pgrades grades_m){
 
     	check = (struct student*)list_get(current);
 
+=======
+    struct iterator* current = (struct iterator *) grades_m->student_list;
+
+    pstudent check = (struct student*) grades_m->student_list;
+
+    while(current != NULL){
+
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
         if(check->id == id){
             return check;
         }
         else{
             current = list_next(current);
+<<<<<<< HEAD
+=======
+            check = (struct student*) current;
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
         }
 
     }
@@ -462,6 +527,7 @@ void print_student(pstudent student){
     printf("%s %d: ",student->name, student->id);
 
     // Start with the head of the linked list
+<<<<<<< HEAD
     struct iterator* current = list_begin(student->course_list);
 
     pcourse curr_course;
@@ -470,6 +536,16 @@ void print_student(pstudent student){
     	curr_course=(struct course*)list_get(current);
         printf("%s %d,", curr_course->course_name, curr_course->course_grade);
         current = list_next(current);
+=======
+    struct iterator* current = (struct iterator *) student->course_list;
+
+    pcourse curr_course = (struct course*) student->course_list;
+
+    for(int i = 0; i<student->course_amnt-1; i++){
+        printf("%s %d,", curr_course->course_name, curr_course->course_grade);
+        current = list_next(current);
+        curr_course = (struct course*) current;
+>>>>>>> 348d025bbb646442c4ece5f56887672d88613780
     }
 
     printf("%s, %d\n", curr_course->course_name, curr_course->course_grade);
