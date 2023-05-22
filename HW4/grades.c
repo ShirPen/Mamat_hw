@@ -49,7 +49,6 @@ struct grades* grades_init(){
     pgrades grades = malloc(sizeof(struct grades));
 
     if(grades == NULL){
-        fprintf(stderr, "Error: malloc grades failed\n");
         return NULL;
     }
     grades->student_list = list_init(student_clone,
@@ -116,6 +115,8 @@ int grades_add_student(struct grades *grades, const char *name, int id){
     else{
         pstudent new_student = student_init(name, id);
         list_push_back(grades->student_list, new_student);
+        student_destroy(new_student);
+
         return SUCCESS;
     }
 }
@@ -142,7 +143,9 @@ int grades_add_grade(struct grades *grades,
 
     //Finds the student in the list
     pstudent student = check_student(id, grades);
-
+    if(student == NULL){
+    	return FAIL;
+    }
     //Checks if course exists
     int res = check_course(name, student);
     if(res == FAIL){
@@ -158,7 +161,7 @@ int grades_add_grade(struct grades *grades,
     list_push_back(student->course_list, course);
     student->course_amnt ++;
     student->course_total += grade;
-
+    course_destroy(course);
 
     return SUCCESS;
 
@@ -178,6 +181,7 @@ int grades_add_grade(struct grades *grades,
 float grades_calc_avg(struct grades *grades, int id, char **out){
 
     if(grades == NULL){
+    	*out = NULL;
         return ERROR;
     }
 
@@ -185,17 +189,22 @@ float grades_calc_avg(struct grades *grades, int id, char **out){
     pstudent student = check_student(id, grades);
 
     if( student == NULL){
+    	*out = NULL;
         return ERROR;
     }
 
+    char *name= malloc(strlen(student->name) +1);
+    if(name == NULL){
+    	*out = NULL;
+    	return ERROR;
+    }
+    strcpy(name , student->name);
+    *out = name;
     if(student->course_amnt == 0){
         return 0;
     }
-    else{
-        *out = student->name;
-        return (student->course_total)/(student->course_amnt);
-    }
 
+    return ((float)student->course_total)/((float)student->course_amnt);
 
 }
 
@@ -276,7 +285,7 @@ int course_clone (void *element, void **output){
         pcourse course_copy = (pcourse)malloc(sizeof(struct course));
 
         if (course_copy == NULL) {
-        	*output= NULL;
+        	*output = NULL;
             return FAIL;
         }
 
@@ -459,18 +468,26 @@ pstudent check_student(int id, pgrades grades_m){
 
 void print_student(pstudent student){
 
-    printf("%s %d: ",student->name, student->id);
+    printf("%s %d:",student->name, student->id);
 
     // Start with the head of the linked list
     struct iterator* current = list_begin(student->course_list);
 
     pcourse curr_course;
-
-    for(int i = 0; i<student->course_amnt-1; i++){
-    	curr_course=(struct course*)list_get(current);
-        printf("%s %d,", curr_course->course_name, curr_course->course_grade);
-        current = list_next(current);
+    int first_elem = 1;
+    while(current != NULL){
+    	curr_course = (struct course*)list_get(current);
+    	if(curr_course == NULL){
+    		return;
+    	}
+    	if(first_elem){
+    		printf(" %s %d", curr_course->course_name, curr_course->course_grade);
+    		first_elem = 0;
+    	}
+    	else{
+    		printf(", %s %d", curr_course->course_name, curr_course->course_grade);
+    	}
+    	current = list_next(current);
     }
-
-    printf("%s, %d\n", curr_course->course_name, curr_course->course_grade);
+    printf("\n");
 }
