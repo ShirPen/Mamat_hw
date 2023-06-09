@@ -18,7 +18,7 @@ int main(int argc, char **argv){
 
     input.split("=", &rule, &p_size);
     String name = rule[0].trim();
-    String val = rule[1].trim();
+    String val = rule[1];
 
     if(name.equals("src-ip") || name.equals("dst-ip")){
         ip main_ip(name);
