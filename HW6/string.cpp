@@ -97,6 +97,7 @@ void String::split(const char *delimiters, String **output, size_t *size) const{
     *size = amount;
 
     if(output == NULL){
+    	delete[] temp;
         return;
     }
 
@@ -110,7 +111,7 @@ void String::split(const char *delimiters, String **output, size_t *size) const{
     char *token_2 = strtok(temp, delimiters);
     while(token_2 != NULL || curr<amount){
         sub_strings[curr].data = token_2;
-        sub_strings[curr].length = strlen(token_2);
+//        sub_strings[curr].length = strlen(token_2);
         curr++;
         token_2 = strtok(NULL, delimiters);
     }
@@ -128,35 +129,39 @@ int String::to_integer() const{
 
 String String::trim() const{
 
-    //leading white spaces
     int leading = 0;
+    int trailing = length - 1;
+    String out;
+    //leading white spaces
     while(data[leading] == ' '){
         leading++;
     }
-
+    
+    if(leading ==(int)length){
+    	return out;
+    }
+	
     //trailing white spaces
-    int trailing = 0;
-    int end = length;
-    while( data[end-1] == ' '){
-        trailing++;
-        end--;
+    while(data[trailing] == ' ') {
+        trailing--;
     }
 
-    int new_size = length - leading - trailing;
-    char *new_data = new char[new_size + 1];
+    int new_size = trailing - leading +2;
+    char *new_data = new char[new_size];
     int j = 0;
-    for(int i = leading; i<=end; i++){
+    for(int i = leading; i<trailing; i++){
         new_data[j] = data[i];
         j++;
     }
     new_data[j] = '\0';
 
-    String out;
-    strcpy(out.data, new_data);
-    out.length = new_size;
+    out = new_data;
+//    strcpy(out.data, new_data);
+//    out.length = new_size;
 
     delete[] new_data;
 
     return out;
 
 }
+
