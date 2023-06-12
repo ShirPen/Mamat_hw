@@ -5,7 +5,7 @@ OBJS= port.o ip.o string.o
 RM= rm -rf
 
 firewall.exe: main.o libfirewall.so 
-	$(CXXLINK) $(CCFLAGS) main.o -o firewall.exe -lfirewall -linput -L.
+	$(CXXLINK) $(CXXFLAGS) main.o -o firewall.exe -lfirewall -linput -L.
 
 libfirewall.so: $(OBJS)
 	$(CXXLINK) -shared $(OBJS) -o libfirewall.so 
@@ -20,7 +20,7 @@ string.o: string.h string.cpp
 	$(CXXLINK) $(CXXFLAGS) -c -fpic string.cpp 
 
 main.o: main.cpp string.h ip.h port.h input.h generic-field.h
-	$(CXXLINK) $(CXXFLAGS) -c -fpic main.cpp 
+	$(CXXLINK) $(CXXFLAGS) -c main.cpp 
 
 clean:
 	$(RM) *.o libfirewall.so
