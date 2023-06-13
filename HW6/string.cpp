@@ -34,6 +34,7 @@ String::~String(){
 }
 
 String& String::operator=(const String &rhs){
+	//checks that this and rhs are not the same strings
     if(equals(rhs)){
         return *this;
     }
@@ -71,6 +72,7 @@ bool String::equals(const String &rhs) const{
 
 bool String::equals(const char *rhs) const {
 
+	//length check to save runtime in case of diff length
     if(length != strlen(rhs)){
         return false;
     }
@@ -85,6 +87,7 @@ bool String::equals(const char *rhs) const {
 
 void String::split(const char *delimiters, String **output, size_t *size) const{
 
+	//checks that the string is not empty
 	if( *data == '\0' || length == 0){
 		*output = NULL;
     	*size = 0;
@@ -103,8 +106,9 @@ void String::split(const char *delimiters, String **output, size_t *size) const{
         //start from end of last call (last time delimiter was replaced with '\0')
         token = strtok(NULL, delimiters);
     }
+    //sets the size of the sub elements to be amount
     *size = amount;
-
+    //check if output is NULL
     if(output == NULL){
     	delete[] temp;
         return;
@@ -119,14 +123,18 @@ void String::split(const char *delimiters, String **output, size_t *size) const{
     int curr = 0;
     char *token_2 = strtok(temp_2, delimiters);
     while (token_2 != NULL || curr < amount) {
+    	//delete the first memory allocation in the default c'tor
+    	delete[] sub_strings[curr].data;
     	sub_strings[curr].data = new char[strlen(token_2) + 1];
         strcpy(sub_strings[curr].data, token_2);
         sub_strings[curr].length = strlen(token_2);
         curr++;
         token_2 = strtok(NULL, delimiters);
     }
+    //sets the output pointer to ppoint on the array of the sub strings
     *output = sub_strings;
 
+    // Deliting temporary allocations
     delete[]temp;
     delete[]temp_2;
 
@@ -173,7 +181,4 @@ String String::trim() const{
     return out;
 
 }
-	void String::string_print(){
-		std::cout << data << std::endl;
-	}
 
