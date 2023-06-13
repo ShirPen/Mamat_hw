@@ -10,6 +10,7 @@ port::~port(){}
 
 port::port(const String &Port) : GenericField(){
 
+	//port type- dst or src
     port_name = Port;
     min_val = 0;
     max_val = MAXPORT;
@@ -45,6 +46,11 @@ bool port::match(String packet) {
     size_t ps_size = 0;
     size_t size = 0;
 
+    //checks that packet is not empty
+    if(packet.equals("")){
+    	return false;
+    }
+
     packet.split(",", &packet_split, &ps_size);
     for(int i = 0; i<int(ps_size); i++){
         packet_split[i] = packet_split[i].trim();
@@ -53,12 +59,14 @@ bool port::match(String packet) {
         if(ports[0].equals(port_name)){
             break;
         }
+        delete[] ports;
     }
-
+    //convert the port to an int
     int curr_port = (ports[1].trim()).to_integer();
+    //deallocate temporary memory allocation
     delete[] packet_split;
     delete[] ports;
-
+    //returns true if the port number meets the rule
     return ((curr_port >= this->min_val) && (curr_port <= this->max_val));
 
 }
